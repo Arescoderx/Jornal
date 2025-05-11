@@ -1,0 +1,110 @@
+/* Navbar personalizada */
+.navbar-custom {
+  background-color: #ffffff !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+  transition: all 0.3s ease;
+}
+
+/* Logo */
+.navbar-custom .navbar-brand img {
+  height: 40px;
+}
+
+/* Centralização do menu no desktop */
+.nav-center-wrapper {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.nav-center {
+  display: flex;
+  gap: 1.5rem;
+}
+
+/* Links da navbar */
+.navbar-custom .navbar-nav .nav-link {
+  position: relative;
+  color: #343a40 !important;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  transition: color 0.3s ease, transform 0.3s ease;
+  text-align: center;
+}
+
+/* Linha animada nos links */
+.navbar-custom .navbar-nav .nav-link::before {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 50%;
+  background-color: #dc3545;
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+.navbar-custom .navbar-nav .nav-link:hover {
+  color: #007bff !important;
+}
+
+.navbar-custom .navbar-nav .nav-link:hover::before {
+  width: 100%;
+}
+
+/* Responsivo para mobile */
+@media (max-width: 991.98px) {
+  .nav-center-wrapper {
+    position: static;
+    transform: none;
+    width: 100%;
+  }
+
+  .nav-center {
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem 0;
+    gap: 1rem;
+  }
+}
+
+/* --- Layout das seções de notícias --- */
+
+/* Imagem com margem inferior em mobile e margem à direita no desktop */
+.custom-image-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.custom-image-margin {
+  margin-right: 30px;
+  margin-bottom: 0;
+}
+
+/* Ajuste do texto */
+.custom-text-margin {
+  margin-left: 15px;
+}
+
+/* Ajustes no mobile */
+@media (max-width: 768px) {
+  .custom-image-container {
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+
+  .custom-image-margin {
+    margin-right: 0;
+    margin-bottom: 15px;
+  }
+
+  .custom-text-container {
+    margin-left: 0;
+  }
+}

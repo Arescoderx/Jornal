@@ -1,0 +1,95 @@
+/* Estilos do Cabeçalho */
+.header {
+  text-align: center;
+  padding: 2rem 0 1rem 0;
+  background-color: #f8f9fa;
+  margin-bottom: 30px;
+}
+
+.header h1 {
+  font-weight: bold;
+  color: #343a40;
+  font-size: 2.5rem;
+}
+
+.header p {
+  font-size: 1.25rem;
+  color: #6c757d;
+  margin-top: 10px;
+}
+
+/* Estilos da Seção Principal */
+.main-news-section {
+  background-color: #f8f9fa;
+  padding: 0px 0;
+  margin-bottom: 40px;
+}
+
+.main-news-title {
+  font-size: 2.75rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.main-news-image {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.main-news-subtitle {
+  font-size: 1.75rem;
+  color: #6c757d;
+  margin-bottom: 15px;
+}
+
+.main-news-text {
+  font-size: 1.25rem;
+  color: #6c757d;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+/* Estilos das Seções de Notícias */
+.section {
+  margin-bottom: 40px;
+}
+
+.section:nth-child(even) {
+  background-color: #f1f1f1;
+  padding: 40px 0;
+}
+
+.section h2 {
+  font-size: 2.25rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.section p {
+  font-size: 1.25rem;
+  color: #6c757d;
+  margin-bottom: 15px;
+}
+
+.section img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin-top: 15px;
+}
+
+/* Estilos específicos de cores */
+.red-section h2 {
+  color: #d9534f;
+}
+
+.green-section h2 {
+  color: #283fa7;
+}
+
+.yellow-section h2 {
+  color: #ffc107;
+}
