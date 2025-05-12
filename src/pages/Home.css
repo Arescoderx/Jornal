@@ -1,8 +1,16 @@
 body,
 section,
+html,
 .header,
 .main-news-section,
 .section {
+  background-color: #ffffff !important;
+}
+.red-section,
+.green-section,
+.yellow-section,
+.main-news-section,
+.header {
   background-color: #ffffff !important;
 }
 

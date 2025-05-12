@@ -52,7 +52,7 @@ const Sobre = () => {
 
       <div className="text-center mt-5">
         <h4 className="text-dark fw-bold destaque-autor">
-          Site desenvolvido por <span className="text-primary">Matheus Miossi Schmidt</span>
+          Site desenvolvido por <span className="text-primary"><br />Matheus Miossi Schmidt</span>
         </h4>
       </div>
     </Container>
