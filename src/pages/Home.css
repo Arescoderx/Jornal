@@ -1,4 +1,21 @@
-/* Estilos do Cabeçalho */
+body,
+section,
+.header,
+.main-news-section,
+.section {
+  background-color: #ffffff !important;
+}
+
+.container,
+.row,
+.col,
+.col-md-5,
+.col-md-6,
+.col-md-7,
+.text-center {
+  background-color: #ffffff !important;
+}
+
 .header {
   text-align: center;
   padding: 2rem 0 1rem 0;

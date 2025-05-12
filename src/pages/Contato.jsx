@@ -3,7 +3,7 @@ import { Container, Button } from "react-bootstrap";
 
 const Contato = () => {
   // Número do WhatsApp (substitua pelo seu número)
-  const numeroWhatsApp = "+55xxxxxxxxxxx"; // Coloque seu número aqui
+  const numeroWhatsApp = "+5527998831999"; // Coloque seu número aqui
 
   // Mensagem de exemplo que será enviada
   const mensagem =
