@@ -1,117 +1,61 @@
-import React, { useState } from "react";
-import { Container, Form, Button, Modal, Spinner } from "react-bootstrap";
-import "./Contato.css";
+import React from "react";
+import { Container, Button } from "react-bootstrap";
 
 const Contato = () => {
-  const [formData, setFormData] = useState({
-    nome: "",
-    noticia: "",
-    imagem: null,
-  });
+  // Número do WhatsApp (substitua pelo seu número)
+  const numeroWhatsApp = "+55xxxxxxxxxxx"; // Coloque seu número aqui
 
-  const [showModal, setShowModal] = useState(false);
-  const [loading, setLoading] = useState(false);
+  // Mensagem de exemplo que será enviada
+  const mensagem =
+    "Olá, gostaria de enviar a seguinte notícia:\n\n'Grande evento de tecnologia na cidade!'";
 
-  const handleChange = (e) => {
-    const { name, value, files } = e.target;
-    if (name === "imagem") {
-      setFormData({ ...formData, imagem: files[0] });
-    } else {
-      setFormData({ ...formData, [name]: value });
-    }
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setLoading(true);
-
-    const formDataToSend = new FormData();
-    formDataToSend.append("nome", formData.nome);
-    formDataToSend.append("noticia", formData.noticia);
-    formDataToSend.append("imagem", formData.imagem);
-
-    fetch("http://localhost:5174/contato", {
-      method: "POST",
-      body: formDataToSend,
-    })
-      .then((response) => response.json())
-      .then(() => {
-        setFormData({ nome: "", noticia: "", imagem: null });
-        setShowModal(true); // Mostrar modal de confirmação
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error("Erro ao enviar dados", error);
-        setLoading(false);
-      });
-  };
+  // Criar a URL para o WhatsApp
+  const urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(
+    mensagem
+  )}`;
 
   return (
-    <Container className="mt-5 contato-container">
-      <h2 className="text-center mb-4 text-primary">Envie sua Notícia</h2>
+    <Container className="mt-5">
+      <h2 className="text-center mb-4 text-primary">
+        Quer mandar uma notícia?
+      </h2>
+      <p className="text-center mb-4">
+        Clique no botão abaixo para enviar sua notícia para o nosso WhatsApp!
+      </p>
 
-      <Form onSubmit={handleSubmit} className="formulario-contato">
-        <Form.Group className="mb-3">
-          <Form.Label>Seu Nome</Form.Label>
-          <Form.Control
-            type="text"
-            name="nome"
-            placeholder="Digite seu nome"
-            value={formData.nome}
-            onChange={handleChange}
-            required
+      {/* Exemplo de Notícia (Imagem e Texto Centralizados) */}
+      <div className="text-center mb-5">
+        <h4>Exemplo de Notícia:</h4>
+        <p>
+          <strong>Imagem: </strong>
+          <img
+            src="https://placehold.co/500x300" // Exemplo de imagem
+            alt="Exemplo de Notícia"
+            className="img-fluid mb-3"
           />
-        </Form.Group>
+        </p>
 
-        <Form.Group className="mb-3">
-          <Form.Label>Imagem</Form.Label>
-          <Form.Control
-            type="file"
-            name="imagem"
-            accept="image/*"
-            onChange={handleChange}
-            required
-          />
-        </Form.Group>
+        <p>
+          <strong>Título: </strong> "Grande evento de tecnologia acontece na
+          cidade!"
+        </p>
+        <p>
+          <strong>Texto: </strong> "Hoje, na cidade de São Paulo, um grande
+          evento de tecnologia foi realizado, reunindo especialistas e
+          inovadores para discutir as últimas tendências. O evento contou com
+          palestras de líderes da indústria e exposições de novos produtos.
+          Milhares de pessoas compareceram e participaram ativamente das
+          discussões. Foi um evento de grande sucesso, que marcou a história da
+          cidade no setor de tecnologia."
+        </p>
+      </div>
 
-        <Form.Group className="mb-3">
-          <Form.Label>Notícia</Form.Label>
-          <Form.Control
-            as="textarea"
-            rows={5}
-            name="noticia"
-            placeholder="Digite o conteúdo da notícia"
-            value={formData.noticia}
-            onChange={handleChange}
-            required
-          />
-        </Form.Group>
-
-        <div className="text-center">
-          <Button variant="primary" type="submit" disabled={loading}>
-            {loading ? (
-              <Spinner animation="border" size="sm" />
-            ) : (
-              "Enviar Notícia"
-            )}
-          </Button>
-        </div>
-      </Form>
-
-      {/* Modal de confirmação */}
-      <Modal show={showModal} onHide={() => setShowModal(false)} centered>
-        <Modal.Header closeButton>
-          <Modal.Title>Notícia Enviada!</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          Sua notícia foi enviada com sucesso. Obrigado pela colaboração!
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="success" onClick={() => setShowModal(false)}>
-            Fechar
-          </Button>
-        </Modal.Footer>
-      </Modal>
+      {/* Botão para Enviar ao WhatsApp */}
+      <div className="text-center mb-5">
+        <Button variant="primary" href={urlWhatsApp} target="_blank">
+          Enviar para o WhatsApp
+        </Button>
+      </div>
     </Container>
   );
 };
