@@ -19,11 +19,11 @@ app.get("/noticias", async (req, res) => {
 
 // Rota para cadastrar notícia
 app.post("/noticias", async (req, res) => {
-  const { titulo, conteudo, imagem } = req.body;
+  const { titulo, conteudo } = req.body;
   try {
     const result = await pool.query(
-      "INSERT INTO noticias (titulo, conteudo, imagem) VALUES ($1, $2, $3) RETURNING *",
-      [titulo, conteudo, imagem]
+      "INSERT INTO noticias (titulo, conteudo) VALUES ($1, $2) RETURNING *",
+      [titulo, conteudo]
     );
     res.status(201).json(result.rows[0]);
   } catch (err) {
