@@ -7,6 +7,11 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Rota raiz
+app.get("/", (req, res) => {
+  res.send("Servidor funcionando corretamente!");
+});
+
 // Rota para listar notícias
 app.get("/noticias", async (req, res) => {
   try {
