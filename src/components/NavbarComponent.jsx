@@ -13,7 +13,8 @@ export default function NavbarComponent() {
       className="mb-4 navbar-custom"
     >
       <Container className="position-relative">
-        <Navbar.Brand href="">
+        {/* Corrigido o href do logo */}
+        <Navbar.Brand href="/"> 
           <img
             src={logo}
             alt="Jornal São Geraldo"

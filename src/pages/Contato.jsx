@@ -1,62 +1,54 @@
-import React, { useState } from 'react';
-import { Container, Form, Button, Alert } from 'react-bootstrap';
-import './Contato.css';
+import React, { useState } from "react";
+import { Container, Form, Button, Modal, Spinner } from "react-bootstrap";
+import "./Contato.css";
 
 const Contato = () => {
   const [formData, setFormData] = useState({
-    nome: '',
-    noticia: '',
-    imagem: null
+    nome: "",
+    noticia: "",
+    imagem: null,
   });
 
-  const [enviado, setEnviado] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
-    if (name === 'imagem') {
+    if (name === "imagem") {
       setFormData({ ...formData, imagem: files[0] });
     } else {
       setFormData({ ...formData, [name]: value });
     }
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    
-    // Cria um FormData para enviar com a imagem e os outros dados
+    setLoading(true);
+
     const formDataToSend = new FormData();
-    formDataToSend.append('nome', formData.nome);
-    formDataToSend.append('noticia', formData.noticia);
-    formDataToSend.append('imagem', formData.imagem); // Envia a imagem
+    formDataToSend.append("nome", formData.nome);
+    formDataToSend.append("noticia", formData.noticia);
+    formDataToSend.append("imagem", formData.imagem);
 
-    try {
-      // Envia os dados para o backend (alterar a URL para seu backend real)
-      const response = await fetch('http://localhost:3000/noticias', {
-        method: 'POST',
-        body: formDataToSend,
+    fetch("http://localhost:5174/contato", {
+      method: "POST",
+      body: formDataToSend,
+    })
+      .then((response) => response.json())
+      .then(() => {
+        setFormData({ nome: "", noticia: "", imagem: null });
+        setShowModal(true); // Mostrar modal de confirmação
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Erro ao enviar dados", error);
+        setLoading(false);
       });
-
-      if (response.ok) {
-        setEnviado(true);
-        setFormData({ nome: '', noticia: '', imagem: null });
-      } else {
-        throw new Error('Erro ao enviar notícia');
-      }
-    } catch (error) {
-      console.error(error);
-      alert('Erro ao enviar os dados. Tente novamente.');
-    }
   };
 
   return (
     <Container className="mt-5 contato-container">
       <h2 className="text-center mb-4 text-primary">Envie sua Notícia</h2>
-
-      {enviado && (
-        <Alert variant="success" onClose={() => setEnviado(false)} dismissible>
-          Obrigado! Sua notícia foi enviada com sucesso.
-        </Alert>
-      )}
 
       <Form onSubmit={handleSubmit} className="formulario-contato">
         <Form.Group className="mb-3">
@@ -96,11 +88,30 @@ const Contato = () => {
         </Form.Group>
 
         <div className="text-center">
-          <Button variant="primary" type="submit">
-            Enviar Notícia
+          <Button variant="primary" type="submit" disabled={loading}>
+            {loading ? (
+              <Spinner animation="border" size="sm" />
+            ) : (
+              "Enviar Notícia"
+            )}
           </Button>
         </div>
       </Form>
+
+      {/* Modal de confirmação */}
+      <Modal show={showModal} onHide={() => setShowModal(false)} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>Notícia Enviada!</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          Sua notícia foi enviada com sucesso. Obrigado pela colaboração!
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="success" onClick={() => setShowModal(false)}>
+            Fechar
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </Container>
   );
 };
