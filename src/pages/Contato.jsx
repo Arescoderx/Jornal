@@ -20,12 +20,32 @@ const Contato = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Aqui você adicionaria a lógica para enviar os dados para o servidor/back-end
-    console.log(formData);
-    setEnviado(true);
-    setFormData({ nome: '', noticia: '', imagem: null });
+    
+    // Cria um FormData para enviar com a imagem e os outros dados
+    const formDataToSend = new FormData();
+    formDataToSend.append('nome', formData.nome);
+    formDataToSend.append('noticia', formData.noticia);
+    formDataToSend.append('imagem', formData.imagem); // Envia a imagem
+
+    try {
+      // Envia os dados para o backend (alterar a URL para seu backend real)
+      const response = await fetch('http://localhost:3000/noticias', {
+        method: 'POST',
+        body: formDataToSend,
+      });
+
+      if (response.ok) {
+        setEnviado(true);
+        setFormData({ nome: '', noticia: '', imagem: null });
+      } else {
+        throw new Error('Erro ao enviar notícia');
+      }
+    } catch (error) {
+      console.error(error);
+      alert('Erro ao enviar os dados. Tente novamente.');
+    }
   };
 
   return (

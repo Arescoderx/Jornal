@@ -2,7 +2,6 @@
   "name": "jornal-sg",
   "private": true,
   "version": "1.0.0",
-  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -11,7 +10,12 @@
   },
   "dependencies": {
     "bootstrap": "^5.3.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
     "json-server": "^1.0.0-beta.3",
+    "multer": "^1.4.5-lts.2",
+    "pg": "^8.15.6",
     "react": "^19.1.0",
     "react-bootstrap": "^2.10.9",
     "react-dom": "^19.1.0",
